@@ -40,36 +40,9 @@ Chaque intent déclaré contient :
 
 ## Cycle de vie d'un intent
 
-```
-┌─────────────┐     POST /intents      ┌─────────────┐
-│  App Client  │ ──────────────────────▷│    Stack     │
-│   (Tmail)    │                        │  (Plateforme)│
-└──────┬───────┘                        └──────┬───────┘
-       │                                       │
-       │  1. Client démarre l'intent           │ 2. Stack résout :
-       │     action: PICK                      │    parcourt les manifests
-       │     type: io.cozy.files               │    trouve les apps matchant
-       │                                       │
-       │  ◁─────── URL du service ─────────────┤
-       │           + availableApps             │
-       │                                       │
-       │  3. Client ouvre iframe               │
-       │     vers service URL                  │
-       │                                       │
-       ▼                                       │
-┌──────────────┐                               │
-│   iframe      │                               │
-│  (Drive app)  │  4. Service query stack       │
-│               │     pour détails de l'intent  │
-│               │  5. Handshake postMessage     │
-│               │  6. User picks file           │
-│               │  7. service.terminate(doc)    │
-└──────┬────────┘                               │
-       │                                       │
-       │  8. Client reçoit le résultat         │
-       │     via postMessage                   │
-       └───────────────────────────────────────┘
-```
+![Cycle de vie d'un intent Cozy](cozy-cycle-vie-intent.svg)
+
+*[Source éditable](cozy-cycle-vie-intent.excalidraw)*
 
 **Étapes détaillées :**
 
