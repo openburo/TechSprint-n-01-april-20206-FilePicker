@@ -13,20 +13,20 @@ $code-background-color: #f1f3f5;
   .nav-list-item {
     // Hover: léger fond bleu pâle
     a:hover {
-      background-color: #d0ebff;
+      background-color: #d0ebff !important;
       color: #1864ab !important;
     }
-    // Page parente active: juste gras, pas de bordure
-    &.active > a {
-      background-color: transparent;
+    // Tous les états actifs : pas de fond
+    &.active > a,
+    &.active > a:hover,
+    a.active,
+    a.active:hover {
+      background-color: transparent !important;
       color: #1864ab !important;
       font-weight: 600;
     }
-    // Page enfant active: gras + bordure gauche
-    a.active {
-      background-color: transparent;
-      color: #1864ab !important;
-      font-weight: 600;
+    // Page enfant active uniquement : bordure gauche
+    .nav-list a.active {
       border-left: 3px solid $link-color;
       padding-left: calc(0.5rem - 3px);
     }
