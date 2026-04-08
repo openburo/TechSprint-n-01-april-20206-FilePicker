@@ -46,6 +46,8 @@ $code-background-color: #f1f3f5;
 .site-header {
   height: auto !important;
   min-height: auto !important;
+  max-height: none !important;
+  flex-shrink: 0 !important;
   padding-bottom: 1rem !important;
 }
 
