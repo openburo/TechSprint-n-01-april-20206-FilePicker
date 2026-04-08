@@ -8,17 +8,22 @@ $search-result-highlight-color: #a5d8ff;
 $feedback-color: darken($link-color, 10%);
 $code-background-color: #f1f3f5;
 
-// Navigation: hover and active states with white text
+// Navigation
 .site-nav {
   .nav-list-item {
+    // Hover: léger fond bleu pâle
     a:hover {
-      background-color: $link-color;
-      color: #ffffff !important;
+      background-color: #d0ebff;
+      color: #1864ab !important;
     }
+    // Page active: bordure gauche bleue + texte gras
     &.active > a,
     a.active {
-      background-color: $link-color;
-      color: #ffffff !important;
+      background-color: #e7f5ff;
+      color: #1864ab !important;
+      font-weight: 600;
+      border-left: 3px solid $link-color;
+      padding-left: calc(0.5rem - 3px);
     }
   }
 }
