@@ -7,3 +7,18 @@ $nav-child-link-color: #1864ab;
 $search-result-highlight-color: #a5d8ff;
 $feedback-color: darken($link-color, 10%);
 $code-background-color: #f1f3f5;
+
+// Navigation: hover and active states with white text
+.site-nav {
+  .nav-list-item {
+    a:hover {
+      background-color: $link-color;
+      color: #ffffff !important;
+    }
+    &.active > a,
+    a.active {
+      background-color: $link-color;
+      color: #ffffff !important;
+    }
+  }
+}
