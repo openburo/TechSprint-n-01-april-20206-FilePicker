@@ -6,6 +6,9 @@ on:
       - '**/*.excalidraw'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   export-svg:
     runs-on: ubuntu-latest
