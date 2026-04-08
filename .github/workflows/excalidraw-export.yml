@@ -30,7 +30,8 @@ jobs:
             excalidraw-brute-export-cli \
               --input "$file" \
               --output "$dir/$base.svg" \
-              --format svg
+              --format svg \
+              --scale 1
           done
 
       - name: Check for changes
