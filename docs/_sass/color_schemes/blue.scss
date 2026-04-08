@@ -28,27 +28,23 @@ $code-background-color: #f1f3f5;
 }
 
 // Logo au-dessus du titre dans la sidebar
-.site-header {
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-
-  .site-title {
+.site-header .site-title {
+  display: block;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  &::before {
+    content: "";
     display: block;
-    text-align: center;
-    &::before {
-      content: "";
-      display: block;
-      width: 100%;
-      padding-bottom: 24%;
-      margin-bottom: 0.75rem;
-      background: url("../images/logo.svg") no-repeat center / 100% auto;
-    }
+    width: 200px;
+    height: 48px;
+    margin: 0 auto 0.75rem;
+    background: url("../images/logo.svg") no-repeat center / contain;
   }
 }
 
-// Empêcher le nav de chevaucher le header
 .site-nav {
-  padding-top: 0.5rem;
+  padding-top: 0.25rem;
 }
 
 // Fix aux_links spacing
