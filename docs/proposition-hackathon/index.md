@@ -39,26 +39,9 @@ A noter que cette approche zero trust évite des sujets difficile :
 
 ## Architecture cible minimale
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                        NAVIGATEUR                            │
-│                                                              │
-│  ┌──────────────────┐           ┌─────────────────────────┐  │
-│  │   App Cliente    │           │   iframe: File Picker   │  │
-│  │   (Tmail, Docs)  │◀════════▷ │   (TDrive, Fichiers…)   │  │
-│  │                  │postMessage│                         │  │
-│  │ Session active A │           │   Session active B      │  │
-│  └────────┬─────────┘           └─────────┬───────────────┘  │
-│           │                               │                  │
-└───────────┼───────────────────────────────┼──────────────────┘
-            │ GET /resolve                  │                     
-            ▼                               ▼                    
-     ┌────────────────────┐        ┌──────────────────┐
-     │  Plateforme        │        │  Service cible   │
-     │  (Open Buro server)│        │  (drive)         │
-     │  registry.json     │        │                  │
-     └────────────────────┘        └──────────────────┘
-```
+![Architecture cible minimale](architecture-cible.svg)
+
+*[Ouvrir dans Excalidraw](https://excalidraw.com/#json=){:target="_blank"} — [Source editable](architecture-cible.excalidraw)*
 
 ---
 
