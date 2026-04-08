@@ -1,0 +1,48 @@
+name: Export Excalidraw to SVG
+
+on:
+  push:
+    paths:
+      - '**/*.excalidraw'
+
+jobs:
+  export-svg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install excalidraw-brute-export-cli
+        run: npm install -g excalidraw-brute-export-cli
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps firefox
+
+      - name: Find and export .excalidraw files
+        run: |
+          find . -name '*.excalidraw' | while read -r file; do
+            dir=$(dirname "$file")
+            base=$(basename "$file" .excalidraw)
+            echo "Exporting $file → $dir/$base.svg"
+            excalidraw-brute-export-cli \
+              --input "$file" \
+              --output "$dir/$base.svg" \
+              --format svg
+          done
+
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet '*.svg' || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit updated SVGs
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add '*.svg'
+          git commit -m "chore: auto-export Excalidraw → SVG"
+          git push
