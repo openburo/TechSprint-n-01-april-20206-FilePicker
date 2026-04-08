@@ -1,0 +1,20 @@
+title: Open Buro — Dossier Technique
+description: Inter-App Communication via Intents & Capabilities — File Picker
+remote_theme: just-the-docs/just-the-docs
+
+url: ""
+baseurl: "/openburo-spec"
+
+plugins:
+  - jekyll-remote-theme
+
+aux_links:
+  - title: "GitHub"
+    url: "https://github.com/Benibur/openburo-spec"
+
+nav_enabled: true
+search_enabled: true
+
+footer_content: "Hackathon Open Buro — Avril 2026"
+
+color_scheme: light
