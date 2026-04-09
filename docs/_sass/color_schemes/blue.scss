@@ -33,6 +33,9 @@ $code-background-color: #f1f3f5;
   text-align: center;
   padding-left: 0;
   padding-right: 0;
+  font-size: 0;        // masque le texte original
+  line-height: 0;
+  color: transparent;
   &::before {
     content: "";
     display: block;
@@ -40,6 +43,15 @@ $code-background-color: #f1f3f5;
     height: 60px;
     margin: 0 auto 0.75rem;
     background: url("../images/logo.svg") no-repeat center / contain;
+  }
+  &::after {
+    content: "Open Buro\ATech Sprint n°1";
+    white-space: pre-line;
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: #1e1e1e;
+    font-weight: 700;
   }
 }
 
