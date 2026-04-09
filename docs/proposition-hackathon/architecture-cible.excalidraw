@@ -8,7 +8,7 @@
       "type": "rectangle",
       "x": 60,
       "y": 40,
-      "width": 742.1614379882812,
+      "width": 675.1614379882812,
       "height": 254.4921875,
       "angle": 0,
       "strokeColor": "#1e1e1e",
@@ -22,15 +22,15 @@
         "type": 3
       },
       "locked": false,
-      "version": 101,
-      "versionNonce": 131309529,
+      "version": 137,
+      "versionNonce": 729405145,
       "index": "a0",
       "isDeleted": false,
       "seed": 1826180183,
       "groupIds": [],
       "frameId": null,
       "boundElements": [],
-      "updated": 1775682396551,
+      "updated": 1775714766091,
       "link": null
     },
     {
