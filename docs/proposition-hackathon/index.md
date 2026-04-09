@@ -36,11 +36,12 @@ Motivations :
 1. **Zéro Trust** : les apps sont sur des domaines distincts et restent étanches, tant côté serveur que dans le browser.
    1. **Authentification** — L'utilisateur dispose déjà de sessions web ouvertes sur les trois services (app cliente, source/drive, plateforme), chacun sur son propre domaine. Pas de SSO ni de token exchange. Pour le hackathon, il est possible de contourner les sécurité du navigateur (CSP, same-origin) via des extensions browser.
    2. **Droits** — Pas d'interaction directe entre l'app cliente et la source. Si le File Picker retourne un lien plutôt qu'un fichier, l'URL intègre le token selon la stratégie propre au drive — pas besoin de normaliser l'accès, juste la réponse HTTP.
-2. **UX intégrée** : le FP s'ouvre dans l'app cliente
-3. **couplage lache** : l'app cliente ne connait rien ni du FP, ni de l'application cible
-4. **auto discovery & généricité** : grace à l'expositions des capabilities par les manifest des applications et centralisée par la "plateforme"
-5. **Faible empreinte dans l'app cliente** : ajout d'une librairie, appel à une api avec un call back.
-6. **OB serveur est facultatif** et peut être remplacé par de la conf en dur dans l'app cliente.
+2. **UX intégrée** : le FP s'ouvre dans l'app cliente et offre 
+3. **un FP hyper adapté** : le front du FP est fournit par le drive et peut donc en exploiter au mieux toutes les fonctionnalités du drive.
+4. **couplage lache** : l'app cliente ne connait rien ni du FP, ni de l'application cible
+5. **auto discovery & généricité** : grace à l'expositions des capabilities par les manifest des applications et centralisée par la "plateforme"
+6. **Faible empreinte dans l'app cliente** : ajout d'une librairie, appel à une api avec un call back.
+7. **OB serveur est facultatif** et peut être remplacé par de la conf en dur dans l'app cliente.
 
 **Architecture des fronts** — Deux scénarios compatibles coexisteront. Chaque éditeur choisit, tout en respectant le protocole File Picker :
 
