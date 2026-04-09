@@ -19,7 +19,7 @@ Ces questions structurent les discussions techniques du hackathon :
 - Faut-il supporter des catégories (comme Android) ou le couple action/type suffit-il ?
 
 **Choix pour le techsprint** :
-- json
+
 ```json
 { 
     id:""
