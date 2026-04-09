@@ -57,7 +57,7 @@ Ces questions structurent les discussions techniques du hackathon :
 * l'app cliente indique au sdk l'url où récupérer le tableau des manifest
 * `ob_sdk.init({manifests:string|obj})`
 
-## intent mangement : ouverture & initialisation de l'intent
+## intent mangement : cyble de vie de l'intent
 
 - URL complète dans le registre ou base URL + route ?
 - Paramètres passés en query string, dans le hash, ou uniquement via postMessage ?
@@ -68,19 +68,17 @@ Ces questions structurent les discussions techniques du hackathon :
 * 
 * 
 
-## Communication client & capability
+## Communication client & iframe
 
 - Protocole postMessage : quels types de messages au-delà de ready/init/done/error ?
 - Progress : le service peut-il notifier une progression (upload en cours, etc.) ?
 - Sécurité : validation d'origin, protection contre le spoofing de messages
 - Timeout : que faire si le service ne répond pas ?
 
-## Cycle de vie du front de l'capability
+**Choix pour le techsprint** :
+* 
+* 
 
-- Le service fournit-il une UI complète ou un composant embarquable ?
-- Responsive : le front du picker doit-il s'adapter à la taille de l'iframe ?
-- `intent:resize` : le service peut-il demander un redimensionnement ?
-- Theming : le picker doit-il respecter le thème de l'app cliente ?
 
 ## Callback & résultat
 
@@ -89,12 +87,22 @@ Ces questions structurent les discussions techniques du hackathon :
 - Pour le contenu : limite de taille raisonnable pour base64 dans postMessage ?
 - Métadonnées minimales dans la réponse : `name`, `mimeType`, `size`, `url` — quoi d'autre ?
 
+**Choix pour le techsprint** :
+* 
+* 
+
 ## Sécurité (CORS, CSP, et au-delà)
 
 - En production : comment gérer CSP `frame-ancestors` sans tout ouvrir ?
 - La plateforme doit-elle fournir une liste blanche de domaines autorisés en iframe ? comment les connaitres ?
 - Protection contre le clickjacking quand le picker est en iframe
 - Persistent capabilitys : un intent peut-il rester ouvert (ex. sync continue, ou pour ouverture plus rapide) ?
+
+
+**Choix pour le techsprint** :
+* 
+* 
+
 
 ---
 
