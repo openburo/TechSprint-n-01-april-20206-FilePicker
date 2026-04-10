@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Sémantique File Picker
-parent: Proposition Hackathon
+parent: Approche front
 nav_order: 1
 ---
 
 # Sémantique du File Picker Intent (DRAFT ALPHA)
 
-[← Proposition Hackathon](index.md) · [Accueil](../index.md)
+[← Approche front](index.md) · [Accueil](../index.md)
 
 ---
 

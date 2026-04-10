@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Bibliographie
-nav_order: 6
+nav_order: 5
 ---
 
 # Bibliographie & références
 
-[← Sujets de réflexion](sujets-ateliers.md) · [Accueil](index.md)
+[← Approche back](approche-back.md) · [Accueil](index.md)
 
 ---
 

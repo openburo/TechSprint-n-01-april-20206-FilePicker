@@ -1,12 +1,13 @@
 ---
 layout: default
 title: Sujets de réflexion
-nav_order: 5
+parent: Approche front
+nav_order: 4
 ---
 
 # Sujets de réflexion pour les ateliers
 
-[← Proposition Hackathon](proposition-hackathon/) · [Accueil](index.md)
+[← Contournements navigateur](contournements-navigateur.md) · [Approche front](index.md) · [Accueil](../index.md)
 
 ---
 
@@ -146,4 +147,4 @@ Persistent capabilitys: besoin de init en postMessage, pas nécessaire pour le P
 
 ---
 
-[Suivant : Bibliographie →](bibliographie.md)
+[Suivant : Approche back →](../approche-back.md)

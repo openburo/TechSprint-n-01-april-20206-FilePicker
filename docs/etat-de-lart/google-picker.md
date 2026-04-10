@@ -210,4 +210,4 @@ Ces enseignements nourrissent directement la [spec proposée](../proposition-hac
 
 ---
 
-[← openDesk](opendesk.md) · [Suivant : Tableau comparatif →](../comparatif.md)
+[← openDesk](opendesk.md) · [Suivant : Tableau comparatif →](comparatif.md)

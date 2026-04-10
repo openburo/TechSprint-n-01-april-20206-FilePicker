@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Proposition Hackathon
-nav_order: 4
+title: Approche front
+nav_order: 3
 has_children: true
 ---
 
-# Proposition pour le Hackathon
+# Approche front
 
-[← Tableau comparatif](../comparatif.md) · [Accueil](../index.md)
+[← Tableau comparatif](../etat-de-lart/comparatif.md) · [Accueil](../index.md)
 
 ---
 
@@ -60,3 +60,4 @@ has_children: true
 - [Sémantique du File Picker Intent (DRAFT ALPHA)](semantique-file-picker.md)
 - [Protocole postMessage détaillé (DRAFT ALPHA)](protocole-postmessage.md)
 - [Contournements navigateur pour le hackathon](contournements-navigateur.md)
+- [Sujets de réflexion pour les ateliers](sujets-ateliers.md)

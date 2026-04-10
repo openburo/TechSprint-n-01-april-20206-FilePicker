@@ -1,12 +1,13 @@
 ---
 layout: default
 title: Tableau comparatif
-nav_order: 3
+parent: État de l'art
+nav_order: 6
 ---
 
 # Tableau Comparatif
 
-[← État de l'art](etat-de-lart/) · [Accueil](index.md)
+[← Google Picker](google-picker.md) · [État de l'art](index.md) · [Accueil](../index.md)
 
 ---
 
@@ -46,4 +47,4 @@ nav_order: 3
 
 ---
 
-[Suivant : Proposition pour le Hackathon →](proposition-hackathon/)
+[Suivant : Approche front →](../proposition-hackathon/)

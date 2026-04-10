@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Protocole postMessage
-parent: Proposition Hackathon
+parent: Approche front
 nav_order: 2
 ---
 
 # Protocole postMessage détaillé (DRAFT ALPHA)
 
-[← Sémantique File Picker](semantique-file-picker.md) · [Proposition Hackathon](index.md) · [Accueil](../index.md)
+[← Sémantique File Picker](semantique-file-picker.md) · [Approche front](index.md) · [Accueil](../index.md)
 
 ---
 

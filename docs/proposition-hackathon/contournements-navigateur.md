@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Contournements navigateur
-parent: Proposition Hackathon
+parent: Approche front
 nav_order: 3
 ---
 
 # Contournements navigateur pour le hackathon (TBC)
 
-[← Protocole postMessage](protocole-postmessage.md) · [Proposition Hackathon](index.md) · [Accueil](../index.md)
+[← Protocole postMessage](protocole-postmessage.md) · [Approche front](index.md) · [Accueil](../index.md)
 
 ---
 
@@ -19,4 +19,4 @@ nav_order: 3
 
 ---
 
-[← Protocole postMessage](protocole-postmessage.md) · [Suivant : Sujets de réflexion →](../sujets-ateliers.md)
+[← Protocole postMessage](protocole-postmessage.md) · [Suivant : Sujets de réflexion →](sujets-ateliers.md)

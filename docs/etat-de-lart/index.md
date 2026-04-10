@@ -20,6 +20,7 @@ Cette section explore les implémentations existantes de communication inter-app
 | [Cozy Cloud / Twake Workplace](cozy-twake.md) | Web — intents adaptés au navigateur | §2.3 |
 | [openDesk (ZenDiS)](opendesk.md)              | Web — proxy backend sans intents    | §2.4 |
 | [Google Picker API](google-picker.md)         | Web — référence propriétaire        | §2.5 |
+| [Tableau comparatif](comparatif.md)           | Synthèse transversale               | §2.6 |
 
 ---
 
