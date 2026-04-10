@@ -4,9 +4,7 @@ title: Accueil
 nav_order: 1
 ---
 
-# Open Buro — Dossier Technique : File Picker
-
-## Inter-App Communication via Intents & Capabilities
+# Open Buro — Tech Sprint n°1 : File Picker
 
 *Préparé pour le hackathon Open Buro — Avril 2026*
 
@@ -25,7 +23,12 @@ Conceptuellement, trois couches doivent intervir :
 | **Plateforme**          | Met en relation le client et la capability                   | Serveur d'intents minimal, ou configuration statique, ex Stack Cozy |
 
 
-=> **Ce dossier présente les patterns existants, une comparaison des implémentations, et des scénario possibles pour articuler ces 3 couches pendant le hackathon.**
+=> **Ce dossier présente :
+
+1. un état de l'art : patterns existants, comparaison d'implémentations
+2. la présentation des 2 approches explorées pendant le techsprint :
+   1. l'approche Front
+   2. l'approche Fack 
 
 ---
 
