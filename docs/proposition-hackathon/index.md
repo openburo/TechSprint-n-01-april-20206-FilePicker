@@ -32,16 +32,17 @@ has_children: true
   * **Alternative ultra-minimaliste :** une simple variable d'environnement avec `drive.example.com/pick` — fonctionnel mais statique, et comme il y aura besoin d'un service plateforme, autant s'appuyer dessus, à discuter.
 * **binaire** : si l'app cliente demande le transfert du contenu binaire : à elle de faire un fetch sur les liens retournés plutot que de faire transiter les binaires par l'iframe (pré requis : le service doit savoir produire une url de téléchargement sécurisé)
 
-Motivations :
+## Motivations
+
 1. **Zéro Trust** : les apps sont sur des domaines distincts et restent étanches, tant côté serveur que dans le browser.
    1. **Authentification** — L'utilisateur dispose déjà de sessions web ouvertes sur les trois services (app cliente, source/drive, plateforme), chacun sur son propre domaine. Pas de SSO ni de token exchange. Pour le hackathon, il est possible de contourner les sécurité du navigateur (CSP, same-origin) via des extensions browser.
    2. **Droits** — Pas d'interaction directe entre l'app cliente et la source. Si le File Picker retourne un lien plutôt qu'un fichier, l'URL intègre le token selon la stratégie propre au drive — pas besoin de normaliser l'accès, juste la réponse HTTP.
-2. **UX intégrée** : le FP s'ouvre dans l'app cliente et offre 
-3. **un FP hyper adapté** : le front du FP est fournit par le drive et peut donc en exploiter au mieux toutes les fonctionnalités du drive.
-4. **couplage lache** : l'app cliente ne connait rien ni du FP, ni de l'application cible
-5. **auto discovery & généricité** : grace à l'expositions des capabilities par les manifest des applications et centralisée par la "plateforme"
-6. **Faible empreinte dans l'app cliente** : ajout d'une librairie, appel à une api avec un call back.
-7. **OB serveur est facultatif** et peut être remplacé par de la conf en dur dans l'app cliente.
+2. **UX intégrée** : le FP s'ouvre directement dans l'app cliente, pas de nouvelle fenêtre.
+3. **un FP totalement adapté à son back** : le front du FP est fournit par le drive et peut donc en exploiter au mieux toutes les fonctionnalités du drive (couleur des dossiers, icones par dossier, gestions de satuts et metadonnées des fichiers, favoris...)
+4. **couplage lache** : l'app cliente ne connait absolument rien ni du FP, ni de l'application cible.
+5. **Faible empreinte dans l'app cliente** : ajout d'une librairie, appel à une api avec un call back.
+6. **auto discovery & généricité** : grace à l'expositions des capabilities par les manifest des applications et centralisée par la "plateforme"
+7. **OpenBuro Server est facultatif** et peut être remplacé par de la conf en dur dans l'app cliente.
 
 **Architecture des fronts** — Deux scénarios compatibles coexisteront. Chaque éditeur choisit, tout en respectant le protocole File Picker :
 
