@@ -1,3 +1,28 @@
 [
-
+  {
+    "capabilities": [
+      {
+        "action": "PICK",
+        "path": "http://10.4.0.32:5000/browse/",
+        "properties": {
+          "mimeTypes": [
+            "*/*"
+          ]
+        }
+      },
+      {
+        "action": "SAVE",
+        "path": "http://10.4.0.32:5000/save/",
+        "properties": {
+          "mimeTypes": [
+            "*/*"
+          ]
+        }
+      }
+    ],
+    "id": "webdav-filepicker",
+    "name": "WebDAV File Picker",
+    "url": "http://10.4.0.32:5000",
+    "version": "1"
+  }
 ]
