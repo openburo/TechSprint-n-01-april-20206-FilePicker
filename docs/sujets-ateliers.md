@@ -30,14 +30,16 @@ Ces questions structurent les discussions techniques du hackathon :
         {
             action:"PICK"
             properties:{
-                mimeTypes:["*/*"]
+                mimeTypes:["*/*"], // file picker peut proposer ces fichiers
+                multiple: boolean // file picker peut retourner plusieurs
             }
             path:""
         },
         {
             action:"SAVE",
             properties:{
-                mimeTypes:["*/*"]
+                mimeTypes:["*/*"],
+                multiple: boolean
             },
             path:""
         }
@@ -70,7 +72,7 @@ Ces questions structurent les discussions techniques du hackathon :
 ```
 ?clientUrl= // pour la targetOrigin
 &id= // pour éviter des conflits sur plusieurs pickers sur plusieurs onglets qui doit être passé ensuite tous les postMessage
-&type= // , separated: permet de choisir si on veut en retour des liens ou des binaires ou les deux
+&type= // , separated: sharingUrl | downloadUrl | payload ;permet de choisir si on veut en retour des liens ou des binaires ou les deux
 &allowedMimeType // , separated: permet de filtrer les fichiers affichées par le file picker, check mime type on mdn
 &multiple=boolean // default = false
 ```
