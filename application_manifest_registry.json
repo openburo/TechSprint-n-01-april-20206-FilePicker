@@ -1,4 +1,20 @@
 [
+  { 
+    "id":"jalios-demo",
+    "name":"Jalios Demo",
+    "url":"https://openburo-jalios.eu.ngrok.io/en/",
+    "version":"0.1",
+    "capabilities": [
+      {
+        "action":"PICK",
+        "properties":{
+            "mimeTypes":["*/*"],
+            "multiple": true
+        },
+        "path":"https://openburo-jalios.eu.ngrok.io/en/plugins/OpenBuroPlugin/jsp/openBuroChooser.jsp"
+      }
+    ]
+  },
   {
     "capabilities": [
       {
