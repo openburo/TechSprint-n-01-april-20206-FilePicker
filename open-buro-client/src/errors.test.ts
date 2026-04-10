@@ -11,7 +11,7 @@ describe('OBCError', () => {
     expect(e.name).toBe('OBCError');
   });
 
-  it('accepts all six error codes', () => {
+  it('accepts all seven error codes', () => {
     const codes: OBCErrorCode[] = [
       'CAPABILITIES_FETCH_FAILED',
       'NO_MATCHING_CAPABILITY',
@@ -19,11 +19,27 @@ describe('OBCError', () => {
       'WS_CONNECTION_FAILED',
       'INTENT_CANCELLED',
       'SAME_ORIGIN_CAPABILITY',
+      'DESTROYED',
     ];
     for (const code of codes) {
       const e = new OBCError(code, 'x');
       expect(e.code).toBe(code);
     }
+    expect(codes.length).toBe(7);
+  });
+
+  it('constructs with DESTROYED code', () => {
+    const err = new OBCError('DESTROYED', 'OpenBuroClient has been destroyed');
+    expect(err.code).toBe('DESTROYED');
+    expect(err.message).toBe('OpenBuroClient has been destroyed');
+    expect(err).toBeInstanceOf(OBCError);
+    expect(err).toBeInstanceOf(Error);
+  });
+
+  it('carries cause on DESTROYED errors', () => {
+    const cause = new Error('underlying');
+    const err = new OBCError('DESTROYED', 'x', cause);
+    expect(err.cause).toBe(cause);
   });
 
   it('preserves cause when provided', () => {

@@ -6,7 +6,8 @@ export type OBCErrorCode =
   | 'IFRAME_TIMEOUT'
   | 'WS_CONNECTION_FAILED'
   | 'INTENT_CANCELLED'
-  | 'SAME_ORIGIN_CAPABILITY';
+  | 'SAME_ORIGIN_CAPABILITY'
+  | 'DESTROYED';
 
 export class OBCError extends Error {
   readonly code: OBCErrorCode;
