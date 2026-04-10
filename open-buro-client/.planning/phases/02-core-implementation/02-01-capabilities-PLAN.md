@@ -11,6 +11,8 @@ files_modified:
   - src/capabilities/loader.test.ts
   - src/capabilities/ws-listener.ts
   - src/capabilities/ws-listener.test.ts
+  - src/lifecycle/abort-context.ts
+  - src/lifecycle/abort-context.test.ts
 autonomous: true
 requirements:
   - CAP-01
@@ -33,6 +35,7 @@ requirements:
   - WS-05
   - WS-06
   - WS-07
+  - LIFECYCLE-01
 
 must_haves:
   truths:
@@ -47,6 +50,10 @@ must_haves:
     - "WsListener reconnects with full-jitter exponential backoff, stops after 5 attempts, emits OBCError(WS_CONNECTION_FAILED)"
     - "WsListener does NOT open a new socket after stop() even if a retry was already scheduled"
     - "WsListener calls onUpdate() only on JSON messages with type === 'REGISTRY_UPDATED'"
+    - "createAbortContext() returns { signal, abort, addCleanup } where signal.aborted is initially false"
+    - "createAbortContext().abort() flips signal.aborted to true and runs registered cleanups in LIFO order"
+    - "createAbortContext() swallows thrown errors from cleanup functions so subsequent cleanups still run"
+    - "createAbortContext().abort() is idempotent — a second call is a no-op"
   artifacts:
     - path: "src/capabilities/resolver.ts"
       provides: "Pure MIME resolver — resolve(caps, intent): Capability[]"
@@ -69,6 +76,13 @@ must_haves:
     - path: "src/capabilities/ws-listener.test.ts"
       provides: "Unit tests using FakeWebSocket for reconnect, jitter, destroyed guard, protocol check, REGISTRY_UPDATED handling"
       min_lines: 80
+    - path: "src/lifecycle/abort-context.ts"
+      provides: "createAbortContext() helper — AbortController + LIFO cleanup stack for Phase 3 destroy() composition"
+      exports: ["createAbortContext", "AbortContext"]
+      min_lines: 20
+    - path: "src/lifecycle/abort-context.test.ts"
+      provides: "Unit tests: initial state, abort flips signal, LIFO cleanup order, error-swallowing, idempotency"
+      min_lines: 40
   key_links:
     - from: "src/capabilities/loader.ts"
       to: "src/errors.ts (OBCError)"
@@ -86,17 +100,22 @@ must_haves:
       to: "src/types.ts (Capability, IntentRequest)"
       via: "import type"
       pattern: "import type \\{ Capability, IntentRequest \\}"
+    - from: "src/lifecycle/abort-context.ts"
+      to: "Phase 3 orchestrator destroy() composition (ORCH-05)"
+      via: "createAbortContext() returns { signal, abort, addCleanup }"
+      pattern: "export function createAbortContext"
 ---
 
 <objective>
-Build the Capability layer — pure MIME resolver, HTTPS-guarded HTTP loader with AbortSignal support, and a WebSocket listener with full-jitter exponential backoff and `destroyed` flag guard. This layer has zero DOM and zero Penpal knowledge (strict layer isolation).
+Build the Capability layer — pure MIME resolver, HTTPS-guarded HTTP loader with AbortSignal support, and a WebSocket listener with full-jitter exponential backoff and `destroyed` flag guard. Also ship the tiny `createAbortContext()` lifecycle helper that Phase 3's orchestrator `destroy()` will compose to tear down every listener, fetch, and WebSocket leak-free. This layer has zero DOM and zero Penpal knowledge (strict layer isolation).
 
-Purpose: The orchestrator (Phase 3) calls `fetchCapabilities()` on init/refresh, runs the result through `resolve()` during `castIntent()`, and optionally starts `WsListener` for live registry updates. Each module is independently unit-testable with no mocks beyond global `fetch` and `WebSocket`.
+Purpose: The orchestrator (Phase 3) calls `fetchCapabilities()` on init/refresh, runs the result through `resolve()` during `castIntent()`, and optionally starts `WsListener` for live registry updates. Each module is independently unit-testable with no mocks beyond global `fetch` and `WebSocket`. The `createAbortContext()` helper is the Phase-2-provided primitive required by CONTEXT.md's locked AbortController decision — Phase 3 calls `controller.abort()` once inside `destroy()` and every registered cleanup runs automatically.
 
 Output:
 - `src/capabilities/resolver.ts` + test (Node env)
 - `src/capabilities/loader.ts` + test (Node env)
 - `src/capabilities/ws-listener.ts` + test (Node env, FakeWebSocket)
+- `src/lifecycle/abort-context.ts` + test (Node env)
 </objective>
 
 <execution_context>
@@ -406,7 +425,7 @@ Import paths use the `.js` extension (ESM convention preserved through tsdown).
 
     Use `Math.pow(this.attempt, ...)` or `**` — either works; match Phase 1 style (no `**` is fine).
 
-    Create `src/capabilities/ws-listener.test.ts` (Node env, no docblock) with the FakeWebSocket helper from RESEARCH.md copied verbatim at the top of the file (inside the test file, not a separate export). At least **10 test cases**:
+    Create `src/capabilities/ws-listener.test.ts` (Node env, no docblock) with the FakeWebSocket helper from RESEARCH.md copied verbatim at the top of the file (inside the test file, not a separate export). At least **11 test cases**:
 
     1. `deriveWsUrl` happy path: https→wss, replaces `/capabilities` with `/capabilities/ws`
     2. `deriveWsUrl` http→ws variant
@@ -440,7 +459,7 @@ Import paths use the `.js` extension (ESM convention preserved through tsdown).
     - `src/capabilities/ws-listener.ts` contains the literal `REGISTRY_UPDATED`
     - `src/capabilities/ws-listener.ts` does NOT contain the literal `penpal`
     - `src/capabilities/ws-listener.ts` does NOT contain the literal `document`
-    - `src/capabilities/ws-listener.test.ts` contains at least 10 `it(` or `test(` calls
+    - `src/capabilities/ws-listener.test.ts` contains at least 11 `it(` or `test(` calls
     - `src/capabilities/ws-listener.test.ts` contains the literal `FakeWebSocket`
     - `src/capabilities/ws-listener.test.ts` contains the literal `vi.useFakeTimers`
     - `pnpm vitest run src/capabilities/ws-listener.test.ts` exits 0
@@ -453,24 +472,143 @@ Import paths use the `.js` extension (ESM convention preserved through tsdown).
   </done>
 </task>
 
+<task type="auto" tdd="true">
+  <name>Task 4: createAbortContext() lifecycle helper (LIFECYCLE-01)</name>
+  <files>src/lifecycle/abort-context.ts, src/lifecycle/abort-context.test.ts</files>
+
+  <read_first>
+    - .planning/phases/02-core-implementation/02-CONTEXT.md (locked AbortController decision in the decisions block)
+  </read_first>
+
+  <behavior>
+    - createAbortContext() returns an object with `signal`, `abort`, `addCleanup`
+    - Initially, `context.signal.aborted === false`
+    - After `context.abort()`, `context.signal.aborted === true`
+    - Cleanups registered via `addCleanup(fn)` run when `abort()` is called
+    - Cleanups run in LIFO order (last registered runs first)
+    - If one cleanup throws, subsequent cleanups still run (error is swallowed during teardown)
+    - `abort()` is idempotent — calling it a second time is a no-op (cleanups do not run twice)
+    - `addCleanup()` called after `abort()` is a no-op for the current context (stack is already drained)
+    - `signal` can be passed to `fetch(url, { signal })`, `addEventListener(..., { signal })`, etc. (standard AbortSignal contract)
+  </behavior>
+
+  <action>
+    This task creates the **Phase-2-provided AbortController helper** required by CONTEXT.md's locked decision ("every listener/fetch/WS registration uses `{ signal }` from a phase-2-provided helper so Phase 3 can call `controller.abort()` for leak-free `destroy()`"). Phase 3's orchestrator will compose `createAbortContext()` inside `castIntent()` and call `abort()` from `destroy()` to tear down every registered fetch / listener / WS in one call.
+
+    Create `src/lifecycle/abort-context.ts` verbatim:
+
+    ```typescript
+    /**
+     * AbortContext — a small wrapper around AbortController that also holds
+     * a LIFO stack of cleanup functions to run on abort. Phase 3's orchestrator
+     * composes one of these per session and calls `abort()` inside `destroy()`
+     * to tear down every registered fetch, listener, and WebSocket leak-free.
+     *
+     * Contract (LIFECYCLE-01):
+     * - `signal` can be passed to fetch/addEventListener/etc. via `{ signal }`.
+     * - `abort()` flips `signal.aborted` to true and drains the cleanup stack in LIFO order.
+     * - A cleanup that throws does NOT prevent subsequent cleanups from running.
+     * - `abort()` is idempotent — a second call is a no-op.
+     */
+    export interface AbortContext {
+      readonly signal: AbortSignal;
+      abort(reason?: unknown): void;
+      addCleanup(fn: () => void): void;
+    }
+
+    export function createAbortContext(): AbortContext {
+      const controller = new AbortController();
+      const cleanups: Array<() => void> = [];
+
+      controller.signal.addEventListener(
+        "abort",
+        () => {
+          while (cleanups.length > 0) {
+            const fn = cleanups.pop();
+            try {
+              fn?.();
+            } catch {
+              // Swallow errors during teardown so subsequent cleanups still run.
+            }
+          }
+        },
+        { once: true }
+      );
+
+      return {
+        signal: controller.signal,
+        abort: (reason) => {
+          if (!controller.signal.aborted) {
+            controller.abort(reason);
+          }
+        },
+        addCleanup: (fn) => {
+          cleanups.push(fn);
+        },
+      };
+    }
+    ```
+
+    Use **double quotes**. No imports from other project files — this is a zero-dependency leaf module. Lives under `src/lifecycle/` (new directory) so the import path is `../lifecycle/abort-context.js` from any other layer.
+
+    Create `src/lifecycle/abort-context.test.ts` (Node env, no docblock) with **at least 5 test cases**:
+
+    1. **Initial state**: `const ctx = createAbortContext(); expect(ctx.signal.aborted).toBe(false);`
+    2. **Abort flips signal**: call `ctx.abort()`, then `expect(ctx.signal.aborted).toBe(true)`.
+    3. **LIFO cleanup order**: register three cleanups that push to an array `["a", "b", "c"]`; after `abort()`, assert the array is `["c", "b", "a"]` (last-in-first-out).
+    4. **Cleanup error swallowed**: register three cleanups where the middle one throws `new Error("boom")`; after `abort()`, assert the first and last cleanups both ran (use spy counters). The thrown error must NOT propagate out of `abort()`.
+    5. **Idempotency**: register one cleanup with a counter; call `abort()` twice; assert the counter is exactly 1 (cleanup did NOT run twice) and `ctx.signal.aborted === true` after both calls.
+
+    Optional 6th test: integration with `fetch({ signal })` — stub `fetch` to return a promise that rejects on `signal.addEventListener("abort", ...)`, call `abort()`, assert the fetch promise rejects. Skip if it adds setup complexity; tests 1-5 already cover LIFECYCLE-01.
+
+    DO NOT use fake timers; the AbortController event fires synchronously when `controller.abort()` is called.
+  </action>
+
+  <verify>
+    <automated>pnpm vitest run src/lifecycle/abort-context.test.ts</automated>
+  </verify>
+
+  <acceptance_criteria>
+    - `src/lifecycle/abort-context.ts` exports `createAbortContext` function
+    - `src/lifecycle/abort-context.ts` exports `AbortContext` interface
+    - `src/lifecycle/abort-context.ts` contains the literal `new AbortController()`
+    - `src/lifecycle/abort-context.ts` contains the literal `controller.signal.addEventListener`
+    - `src/lifecycle/abort-context.ts` contains the literal `cleanups.pop()`
+    - `src/lifecycle/abort-context.ts` contains the literal `controller.signal.aborted`
+    - `src/lifecycle/abort-context.ts` does NOT contain the literal `penpal`
+    - `src/lifecycle/abort-context.ts` does NOT contain the literal `document`
+    - `src/lifecycle/abort-context.test.ts` contains at least 5 `it(` or `test(` calls
+    - `pnpm vitest run src/lifecycle/abort-context.test.ts` exits 0
+    - `pnpm typecheck` exits 0
+    - `pnpm lint` exits 0
+  </acceptance_criteria>
+
+  <done>
+    createAbortContext helper committed with 5+ tests covering initial state, abort, LIFO order, error-swallowing, and idempotency. Phase 3 orchestrator `destroy()` can now compose this for leak-free teardown.
+  </done>
+</task>
+
 </tasks>
 
 <verification>
-All three tasks produce a green `pnpm vitest run src/capabilities/` and do not break `pnpm run ci`. No file in this plan imports `penpal`. No file touches `document` or `window.HTMLElement`. OBCError is the only error class used.
+All four tasks produce a green `pnpm vitest run src/capabilities/ src/lifecycle/` and do not break `pnpm run ci`. No file in this plan imports `penpal`. No file touches `document` or `window.HTMLElement`. OBCError is the only error class used in the capabilities layer; the lifecycle helper has zero error-class dependency.
 </verification>
 
 <success_criteria>
-- `pnpm vitest run src/capabilities/` exits 0 with 23+ tests (7 resolver + 6 loader + 10+ ws-listener)
+- `pnpm vitest run src/capabilities/ src/lifecycle/` exits 0 with 29+ tests (7 resolver + 6 loader + 11+ ws-listener + 5+ abort-context)
 - `pnpm run ci` exits 0 (typecheck + lint + test + attw)
-- `grep -r "penpal" src/capabilities/` returns nothing
-- `grep -r "document\." src/capabilities/` returns nothing
-- All 20 requirement IDs (CAP-01..07, RES-01..06, WS-01..07) covered by at least one test assertion
+- `grep -r "penpal" src/capabilities/ src/lifecycle/` returns nothing
+- `grep -r "document\." src/capabilities/ src/lifecycle/` returns nothing
+- All 21 requirement IDs (CAP-01..07, RES-01..06, WS-01..07, LIFECYCLE-01) covered by at least one test assertion
 </success_criteria>
 
 <output>
 After completion, create `.planning/phases/02-core-implementation/02-01-SUMMARY.md` using the standard summary template. Record:
-- Files created (6: 3 source + 3 test)
+- Files created (8: 4 source + 4 test)
 - Test count per file
 - Any FakeWebSocket quirks or happy-dom-vs-node differences encountered
 - Whether the `noUncheckedIndexedAccess` setting required any extra guards beyond the resolver/loader pattern
+- Confirmation that `createAbortContext()` is exported from `src/lifecycle/abort-context.ts` and ready for Phase 3 composition
 </output>
+</content>
+</invoke>

@@ -283,6 +283,10 @@ Because Plan 02-04 and this plan run in the same wave, `src/intent/session.ts` m
     <automated>pnpm typecheck</automated>
   </verify>
 
+  <verify_note>
+    If `pnpm typecheck` fails with errors NOT in session.ts, the session.ts type additions are fine — proceed to commit. The project-wide typecheck is only considered relevant here if errors reference `src/intent/session.ts` or the `ActiveSession` symbol. Errors elsewhere (e.g. a stale module in an unrelated layer) are out of scope for this task and should be surfaced in the plan SUMMARY, not blocked on.
+  </verify_note>
+
   <acceptance_criteria>
     - `src/intent/session.ts` exists
     - `src/intent/session.ts` exports `interface ActiveSession`

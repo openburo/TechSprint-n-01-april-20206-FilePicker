@@ -20,7 +20,7 @@ must_haves:
   truths:
     - "All Phase 2 modules are re-exported from src/index.ts so Phase 3 can import them from the barrel"
     - "pnpm run ci exits 0 — typecheck + lint + test + attw all green"
-    - "@openburo/client type surface includes: resolve, fetchCapabilities, WsListener, deriveWsUrl, planCast, createShadowHost, buildIframe, buildModal, trapFocus, lockBodyScroll, BridgeAdapter, ConnectionHandle, MockBridge, PenpalBridge, ActiveSession"
+    - "@openburo/client type surface includes: resolve, fetchCapabilities, WsListener, deriveWsUrl, createAbortContext, AbortContext, planCast, createShadowHost, buildIframe, buildModal, trapFocus, lockBodyScroll, BridgeAdapter, ConnectionHandle, MockBridge, PenpalBridge, ActiveSession"
     - "No cross-layer import violations — grep enforcement rules satisfied"
     - "attw --pack continues to exit 0 after the barrel expansion"
   artifacts:
@@ -111,10 +111,11 @@ The Phase 2 additions must PRESERVE every Phase 1 export (nothing removed) and A
   <action>
     **Step 1: Verify all Phase 2 files exist.** Run:
     ```bash
-    ls src/capabilities/ src/intent/ src/ui/ src/messaging/
+    ls src/capabilities/ src/lifecycle/ src/intent/ src/ui/ src/messaging/
     ```
     Expected files (beyond Phase 1):
     - src/capabilities/resolver.ts, loader.ts, ws-listener.ts
+    - src/lifecycle/abort-context.ts
     - src/intent/cast.ts, session.ts (id.ts is Phase 1)
     - src/ui/styles.ts, iframe.ts, focus-trap.ts, modal.ts, scroll-lock.ts
     - src/messaging/bridge-adapter.ts, mock-bridge.ts, penpal-bridge.ts
@@ -156,6 +157,11 @@ The Phase 2 additions must PRESERVE every Phase 1 export (nothing removed) and A
     export type { WsListenerOptions } from "./capabilities/ws-listener";
     export { WsListener, deriveWsUrl } from "./capabilities/ws-listener";
 
+    // ---- Phase 2: Lifecycle layer ----
+
+    export type { AbortContext } from "./lifecycle/abort-context";
+    export { createAbortContext } from "./lifecycle/abort-context";
+
     // ---- Phase 2: Intent layer ----
 
     export { planCast } from "./intent/cast";
@@ -195,6 +201,15 @@ The Phase 2 additions must PRESERVE every Phase 1 export (nothing removed) and A
         expect(typeof mod.fetchCapabilities).toBe("function");
         expect(typeof mod.WsListener).toBe("function"); // class
         expect(typeof mod.deriveWsUrl).toBe("function");
+      });
+
+      it("re-exports lifecycle layer", async () => {
+        const mod = await import("./index");
+        expect(typeof mod.createAbortContext).toBe("function");
+        const ctx = mod.createAbortContext();
+        expect(ctx.signal.aborted).toBe(false);
+        ctx.abort();
+        expect(ctx.signal.aborted).toBe(true);
       });
 
       it("re-exports intent layer", async () => {
@@ -250,6 +265,11 @@ The Phase 2 additions must PRESERVE every Phase 1 export (nothing removed) and A
     grep -rn "penpal" src/capabilities/ || true
     # Expected: no output
 
+    # Lifecycle layer must not touch DOM or Penpal (zero-dep leaf)
+    grep -rn "document\." src/lifecycle/ || true
+    grep -rn "penpal" src/lifecycle/ || true
+    # Expected: no output
+
     # Messaging layer must not touch DOM directly (iframe param is OK, but no createElement)
     grep -rn "document.createElement" src/messaging/ || true
     # Expected: no output
@@ -285,6 +305,8 @@ The Phase 2 additions must PRESERVE every Phase 1 export (nothing removed) and A
     - `src/index.ts` contains the literal `export { resolve } from "./capabilities/resolver"`
     - `src/index.ts` contains the literal `export { fetchCapabilities } from "./capabilities/loader"`
     - `src/index.ts` contains the literal `export { WsListener, deriveWsUrl } from "./capabilities/ws-listener"`
+    - `src/index.ts` contains the literal `export { createAbortContext } from "./lifecycle/abort-context"`
+    - `src/index.ts` contains the literal `export type { AbortContext } from "./lifecycle/abort-context"`
     - `src/index.ts` contains the literal `export { planCast } from "./intent/cast"`
     - `src/index.ts` contains the literal `export type { ActiveSession } from "./intent/session"`
     - `src/index.ts` contains the literal `export { createShadowHost` and `from "./ui/styles"`
@@ -334,5 +356,5 @@ After completion, create `.planning/phases/02-core-implementation/02-05-SUMMARY.
 - The full CI gate runtime (pnpm run ci wall-clock time)
 - Total Phase 2 test count across all layers (sum of resolver + loader + ws-listener + cast + styles + iframe + focus-trap + modal + bridge-adapter + mock-bridge + penpal-bridge + index tests)
 - Any layer isolation grep violations discovered and how they were fixed
-- Phase 3 readiness checklist: can Phase 3 `import { resolve, planCast, fetchCapabilities, WsListener, createShadowHost, buildIframe, buildModal, trapFocus, lockBodyScroll, MockBridge, PenpalBridge, ActiveSession, BridgeAdapter } from "@openburo/client"` successfully?
+- Phase 3 readiness checklist: can Phase 3 `import { resolve, planCast, fetchCapabilities, WsListener, createAbortContext, createShadowHost, buildIframe, buildModal, trapFocus, lockBodyScroll, MockBridge, PenpalBridge, ActiveSession, BridgeAdapter, AbortContext } from "@openburo/client"` successfully?
 </output>

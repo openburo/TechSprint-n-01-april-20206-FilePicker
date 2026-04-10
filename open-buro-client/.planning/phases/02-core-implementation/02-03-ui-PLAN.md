@@ -57,6 +57,7 @@ must_haves:
     - "Modal keydown listener is attached to shadowRoot (not document)"
     - "lockBodyScroll() sets document.body.style.overflow='hidden' and returns a restorer"
     - "Loading spinner overlay hides by default and appears after 150ms setTimeout delay on show()"
+    - "Modal destroy() restores focus to the element that held focus before buildModal() was called (WCAG 2.4.3)"
   artifacts:
     - path: "src/ui/styles.ts"
       provides: "createShadowHost(container, zIndex) → { host, root } with CSS reset + createSpinnerOverlay()"
@@ -319,7 +320,7 @@ From 02-CONTEXT.md (user-confirmed):
 
     Use `vi.useFakeTimers()` / `vi.useRealTimers()` for spinner tests.
 
-    **Note: `lockBodyScroll` is tested inside modal tests (Task 5)**, not here — it only takes meaning in the context of the modal lifecycle.
+    **Note: `lockBodyScroll` is tested inside modal tests (Task 4)**, not here — it only takes meaning in the context of the modal lifecycle.
   </action>
 
   <verify>
@@ -676,6 +677,11 @@ From 02-CONTEXT.md (user-confirmed):
       callbacks: ModalCallbacks,
       shadowRoot: ShadowRoot
     ): ModalResult {
+      // UI-07 (WCAG 2.4.3): capture the element that held focus BEFORE the modal opens
+      // so destroy() can restore it when the modal closes. This runs before any DOM
+      // mutation or scroll lock so the snapshot is the true pre-modal focus owner.
+      const previousFocus = document.activeElement as HTMLElement | null;
+
       const restoreScroll = lockBodyScroll();
 
       const style = document.createElement("style");
@@ -758,6 +764,14 @@ From 02-CONTEXT.md (user-confirmed):
       const destroy = () => {
         shadowRoot.removeEventListener("keydown", onKeyDown);
         releaseTrap();
+        // UI-07 (WCAG 2.4.3): restore focus to the element that held it before buildModal().
+        // The element may be detached by the time destroy() runs (host page re-rendered,
+        // iframe removed, etc.) — swallow any focus() error in that case.
+        try {
+          previousFocus?.focus?.();
+        } catch {
+          // element may be detached; ignore
+        }
         style.remove();
         wrapper.remove();
         restoreScroll();
@@ -844,7 +858,7 @@ From 02-CONTEXT.md (user-confirmed):
 
     **Caller contract**: `buildModal` appends the style tag to `shadowRoot` and returns the `element` (wrapper) unattached. The caller (orchestrator) appends `element` to `shadowRoot`. This matches RESEARCH.md.
 
-    Create `src/ui/modal.test.ts` with FIRST LINE `// @vitest-environment happy-dom`. At least **12 tests**:
+    Create `src/ui/modal.test.ts` with FIRST LINE `// @vitest-environment happy-dom`. At least **13 tests**:
 
     Setup helper: `function setup(caps: Capability[] = [...])` that creates a host, attaches shadow, calls `buildModal(caps, { onSelect, onCancel }, root)`, appends `element` to `root`, returns `{ host, root, element, destroy, onSelect, onCancel }`.
 
@@ -860,6 +874,7 @@ From 02-CONTEXT.md (user-confirmed):
     10. destroy() removes wrapper from shadow (`shadowRoot.contains(wrapper) === false`)
     11. destroy() restores body scroll: before destroy, `document.body.style.overflow === "hidden"`; after destroy, it reverts to the pre-open value (empty string)
     12. Render with capability `appName: "<img src=x onerror=alert(1)>"` — assert the rendered span has `textContent` containing the literal string `"<img"` and the shadow root contains no actual `<img>` element (XSS guard via textContent)
+    13. **UI-07 focus restoration (WCAG 2.4.3)**: create a `<button id="trigger">Open</button>` in `document.body`, call `trigger.focus()`, assert `document.activeElement === trigger`. Then call setup() to open the modal; assert focus moved into the modal (either an option item or the dialog, via `root.activeElement`). Then call `destroy()`. Assert `document.activeElement === trigger` — focus returned to the pre-open trigger element. Clean up the trigger in afterEach.
 
     Also assert that after setup, `document.body.style.overflow === "hidden"` (scroll lock on open).
   </action>
@@ -882,8 +897,11 @@ From 02-CONTEXT.md (user-confirmed):
     - `src/ui/modal.ts` does NOT contain the literal `innerHTML`
     - `src/ui/modal.ts` does NOT contain the literal `penpal`
     - `src/ui/modal.ts` does NOT contain the literal `document.addEventListener("keydown"` (Pitfall 5)
+    - `src/ui/modal.ts` contains the literal `previousFocus` (UI-07 focus capture)
+    - `src/ui/modal.ts` contains the literal `previousFocus?.focus` (UI-07 focus restore)
+    - `src/ui/modal.test.ts` contains the literal `restores focus` (UI-07 test name)
     - `src/ui/modal.test.ts` first line contains `@vitest-environment happy-dom`
-    - `src/ui/modal.test.ts` contains at least 12 `it(` or `test(` calls
+    - `src/ui/modal.test.ts` contains at least 13 `it(` or `test(` calls
     - `pnpm vitest run src/ui/modal.test.ts` exits 0
     - `pnpm typecheck` exits 0
     - `pnpm lint` exits 0
@@ -901,7 +919,7 @@ All four tasks produce green test runs. No UI file imports `penpal`. `focus-trap
 </verification>
 
 <success_criteria>
-- `pnpm vitest run src/ui/` exits 0 with 33+ tests (8 styles + 8 iframe + 5 focus-trap + 12 modal)
+- `pnpm vitest run src/ui/` exits 0 with 34+ tests (8 styles + 8 iframe + 5 focus-trap + 13 modal)
 - `pnpm run ci` exits 0
 - `grep -r "penpal" src/ui/` returns nothing
 - `grep -r "document.activeElement" src/ui/focus-trap.ts` returns nothing

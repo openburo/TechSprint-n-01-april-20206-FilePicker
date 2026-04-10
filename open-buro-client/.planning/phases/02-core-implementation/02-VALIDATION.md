@@ -2,7 +2,7 @@
 phase: 2
 slug: core-implementation
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-04-10
 ---
@@ -42,9 +42,10 @@ created: 2026-04-10
 | 2-01-01 | capabilities | 1 | RES-01..07 | unit (node) | `pnpm vitest run src/capabilities/resolver.test.ts` | ⬜ |
 | 2-01-02 | capabilities | 1 | CAP-01..07 | unit (node) | `pnpm vitest run src/capabilities/loader.test.ts` | ⬜ |
 | 2-01-03 | capabilities | 1 | WS-01..07 | unit (node) | `pnpm vitest run src/capabilities/ws-listener.test.ts` | ⬜ |
+| 2-01-04 | capabilities | 1 | LIFECYCLE-01 | unit (node) | `pnpm vitest run src/lifecycle/abort-context.test.ts` | ⬜ |
 | 2-02-01 | intent | 1 | INT-01..09 (logic), RES-07 | unit (node) | `pnpm vitest run src/intent/cast.test.ts` | ⬜ |
 | 2-03-01 | ui | 1 | IFR-01..10 | unit (happy-dom) | `pnpm vitest run src/ui/iframe.test.ts` | ⬜ |
-| 2-03-02 | ui | 1 | UI-08, UI-09, UI-11 | unit (happy-dom) | `pnpm vitest run src/ui/styles.test.ts` | ⬜ |
+| 2-03-02 | ui | 1 | UI-08, UI-09, UI-11, IFR-09 | unit (happy-dom) | `pnpm vitest run src/ui/styles.test.ts` | ⬜ |
 | 2-03-03 | ui | 1 | UI-06, UI-07 | unit (happy-dom) | `pnpm vitest run src/ui/focus-trap.test.ts` | ⬜ |
 | 2-03-04 | ui | 1 | UI-01..11 (composite) | unit (happy-dom) | `pnpm vitest run src/ui/modal.test.ts` | ⬜ |
 | 2-04-01 | messaging | 1 | MSG-01 | unit (node) | `pnpm vitest run src/messaging/bridge-adapter.test.ts` | ⬜ |
@@ -62,6 +63,7 @@ created: 2026-04-10
 - [ ] `src/capabilities/resolver.ts` — pure MIME matcher
 - [ ] `src/capabilities/loader.ts` — HTTP fetch with AbortController
 - [ ] `src/capabilities/ws-listener.ts` — WebSocket with full-jitter backoff + destroyed guard
+- [ ] `src/lifecycle/abort-context.ts` — createAbortContext() helper for Phase 3 destroy() composition (LIFECYCLE-01)
 - [ ] `src/intent/cast.ts` — pure `planCast()` discriminated union
 - [ ] `src/intent/session.ts` — `ActiveSession` type + `SessionMap` (used by Phase 3 orchestrator)
 - [ ] `src/ui/styles.ts` — Shadow DOM host + CSS reset + keyframes
@@ -89,11 +91,11 @@ created: 2026-04-10
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 20s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [ ] Wave 0 covers all MISSING references *(set on execution)*
+- [x] No watch-mode flags
+- [x] Feedback latency < 20s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
