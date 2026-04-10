@@ -174,17 +174,102 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-Empty initially. Populated by gsd-roadmapper during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (populated by roadmapper) | | Pending |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| FOUND-06 | Phase 1 | Pending |
+| FOUND-07 | Phase 1 | Pending |
+| CAP-01 | Phase 2 | Pending |
+| CAP-02 | Phase 2 | Pending |
+| CAP-03 | Phase 2 | Pending |
+| CAP-04 | Phase 2 | Pending |
+| CAP-05 | Phase 2 | Pending |
+| CAP-06 | Phase 2 | Pending |
+| CAP-07 | Phase 2 | Pending |
+| RES-01 | Phase 2 | Pending |
+| RES-02 | Phase 2 | Pending |
+| RES-03 | Phase 2 | Pending |
+| RES-04 | Phase 2 | Pending |
+| RES-05 | Phase 2 | Pending |
+| RES-06 | Phase 2 | Pending |
+| RES-07 | Phase 2 | Pending |
+| WS-01 | Phase 2 | Pending |
+| WS-02 | Phase 2 | Pending |
+| WS-03 | Phase 2 | Pending |
+| WS-04 | Phase 2 | Pending |
+| WS-05 | Phase 2 | Pending |
+| WS-06 | Phase 2 | Pending |
+| WS-07 | Phase 2 | Pending |
+| INT-01 | Phase 2 | Pending |
+| INT-02 | Phase 2 | Pending |
+| INT-03 | Phase 2 | Pending |
+| INT-04 | Phase 2 | Pending |
+| INT-05 | Phase 2 | Pending |
+| INT-06 | Phase 2 | Pending |
+| INT-07 | Phase 2 | Pending |
+| INT-08 | Phase 2 | Pending |
+| INT-09 | Phase 2 | Pending |
+| IFR-01 | Phase 2 | Pending |
+| IFR-02 | Phase 2 | Pending |
+| IFR-03 | Phase 2 | Pending |
+| IFR-04 | Phase 2 | Pending |
+| IFR-05 | Phase 2 | Pending |
+| IFR-06 | Phase 2 | Pending |
+| IFR-07 | Phase 2 | Pending |
+| IFR-08 | Phase 2 | Pending |
+| IFR-09 | Phase 2 | Pending |
+| IFR-10 | Phase 2 | Pending |
+| UI-01 | Phase 2 | Pending |
+| UI-02 | Phase 2 | Pending |
+| UI-03 | Phase 2 | Pending |
+| UI-04 | Phase 2 | Pending |
+| UI-05 | Phase 2 | Pending |
+| UI-06 | Phase 2 | Pending |
+| UI-07 | Phase 2 | Pending |
+| UI-08 | Phase 2 | Pending |
+| UI-09 | Phase 2 | Pending |
+| UI-10 | Phase 2 | Pending |
+| UI-11 | Phase 2 | Pending |
+| MSG-01 | Phase 2 | Pending |
+| MSG-02 | Phase 2 | Pending |
+| MSG-03 | Phase 2 | Pending |
+| MSG-04 | Phase 2 | Pending |
+| MSG-05 | Phase 2 | Pending |
+| MSG-06 | Phase 2 | Pending |
+| ORCH-01 | Phase 3 | Pending |
+| ORCH-02 | Phase 3 | Pending |
+| ORCH-03 | Phase 3 | Pending |
+| ORCH-04 | Phase 3 | Pending |
+| ORCH-05 | Phase 3 | Pending |
+| ORCH-06 | Phase 3 | Pending |
+| PKG-01 | Phase 4 | Pending |
+| PKG-02 | Phase 4 | Pending |
+| PKG-03 | Phase 4 | Pending |
+| PKG-04 | Phase 4 | Pending |
+| PKG-05 | Phase 4 | Pending |
+| PKG-06 | Phase 4 | Pending |
+| PKG-07 | Phase 4 | Pending |
+| PKG-08 | Phase 4 | Pending |
+| QA-01 | Phase 4 | Pending |
+| QA-02 | Phase 4 | Pending |
+| QA-03 | Phase 4 | Pending |
+| QA-04 | Phase 4 | Pending |
+| QA-05 | Phase 4 | Pending |
+| QA-06 | Phase 4 | Pending |
+| QA-07 | Phase 4 | Pending |
+| QA-08 | Phase 4 | Pending |
+| QA-09 | Phase 4 | Pending |
+| QA-10 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 71 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 71
+- v1 requirements listed: 88 total (71 base + 17 [research] additions folded in during research phase)
+- Mapped to phases: 88/88
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-10*
-*Last updated: 2026-04-10 after initial definition + research folding*
+*Last updated: 2026-04-10 — traceability populated by roadmapper*
