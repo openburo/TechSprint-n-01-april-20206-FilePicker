@@ -13,7 +13,7 @@ export default defineConfig([
     sourcemap: true,
     clean: true,
     treeshake: true,
-    external: ['penpal'],
+    deps: { neverBundle: ['penpal'] },
   },
   // UMD: bundle Penpal in — self-contained for CDN <script> usage
   {
@@ -25,6 +25,6 @@ export default defineConfig([
     globalName: 'OpenBuroClient',
     minify: true,
     sourcemap: false,
-    // penpal NOT in external → bundled into UMD
+    // penpal NOT in neverBundle → bundled into UMD
   },
 ]);

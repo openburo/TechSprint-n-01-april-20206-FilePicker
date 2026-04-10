@@ -1,5 +1,5 @@
 // src/intent/id.test.ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { generateSessionId } from './id';
 
 describe('generateSessionId', () => {
@@ -14,7 +14,7 @@ describe('generateSessionId', () => {
   it('returns a UUID v4 via getRandomValues fallback when randomUUID is absent', async () => {
     // Temporarily remove randomUUID to force the fallback branch
     const original = crypto.randomUUID;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: deliberately clobbering crypto.randomUUID for fallback branch coverage
     delete (globalThis.crypto as any).randomUUID;
     try {
       // generateSessionId checks typeof crypto.randomUUID at call-time (not module-load-time)

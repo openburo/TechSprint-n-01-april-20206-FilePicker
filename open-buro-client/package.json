@@ -3,33 +3,35 @@
   "version": "0.1.0",
   "description": "Framework-agnostic browser SDK for the OpenBuro intent/capability protocol",
   "type": "module",
-  "main": "./dist/obc.cjs.js",
-  "module": "./dist/obc.esm.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/obc.esm.js"
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/types/index.d.cts",
-        "default": "./dist/obc.cjs.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
-    "build":      "tsdown",
-    "typecheck":  "tsc --noEmit",
-    "test":       "vitest run",
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "test:watch": "vitest",
-    "coverage":   "vitest run --coverage",
-    "lint":       "biome check .",
-    "format":     "biome format --write .",
-    "attw":       "pnpm dlx @arethetypeswrong/cli --pack",
-    "ci":         "tsc --noEmit && biome check . && vitest run && pnpm dlx @arethetypeswrong/cli --pack"
+    "coverage": "vitest run --coverage",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "attw": "pnpm dlx @arethetypeswrong/cli --pack",
+    "ci": "tsc --noEmit && biome check . && vitest run && pnpm dlx @arethetypeswrong/cli --pack"
   },
   "dependencies": {
     "penpal": "7.0.6"

@@ -1,9 +1,9 @@
 // src/index.ts — public API barrel (Phase 1 scope only)
 // Later phases add their own exports here.
 
-export { OBCError } from './errors';
 export type { OBCErrorCode } from './errors';
-
+export { OBCError } from './errors';
+export { generateSessionId } from './intent/id';
 export type {
   Capability,
   CastPlan,
@@ -13,5 +13,3 @@ export type {
   IntentResult,
   OBCOptions,
 } from './types';
-
-export { generateSessionId } from './intent/id';
