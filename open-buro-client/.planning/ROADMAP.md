@@ -44,7 +44,14 @@ Plans:
   3. The WebSocket listener reconnects with full-jitter exponential backoff and never opens a new socket after `stop()` is called, even if a retry timer was already scheduled — verified by unit test using a fake timer
   4. A chooser modal rendered in a happy-dom document traps keyboard focus inside the Shadow DOM, dismisses on ESC or backdrop click, and restores focus to the trigger element on close — verified by unit tests without Penpal
   5. Calling `PenpalBridge.connect()` with a same-origin `remoteWindow` resolves a `ConnectionHandle`; calling it with `allowedOrigins` set to a mismatched origin causes the Penpal handshake to reject — verified via `MockBridge`
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 02-01-capabilities-PLAN.md — Pure MIME resolver, HTTPS-guarded HTTP loader with AbortSignal, WebSocket listener with full-jitter backoff + destroyed guard (Wave 1)
+- [ ] 02-02-intent-PLAN.md — Pure planCast() discriminated union + ActiveSession type for Phase 3 session Map (Wave 1)
+- [ ] 02-03-ui-PLAN.md — Shadow DOM host + CSS reset, iframe factory with same-origin guard, Shadow-DOM-aware focus trap, chooser modal with full a11y baseline (Wave 1)
+- [ ] 02-04-messaging-PLAN.md — BridgeAdapter interface, MockBridge for tests, PenpalBridge via Penpal v7 connect + WindowMessenger (Wave 1)
+- [ ] 02-05-integration-PLAN.md — Extend public barrel, verify layer isolation, full pnpm run ci gate (Wave 2)
 
 ### Phase 3: Orchestration
 **Goal**: `new OpenBuroClient(options)` is a fully working public API — `castIntent`, `getCapabilities`, `refreshCapabilities`, and `destroy` all behave as specified, multiple concurrent instances do not interfere, and `destroy()` leaves zero leaks
