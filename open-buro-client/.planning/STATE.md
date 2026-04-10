@@ -85,8 +85,7 @@ None.
 
 ### Blockers/Concerns
 
-- [Pre-Phase 2] Shadow DOM + iframe focus delegation has browser-specific quirks; spike needed before implementing UI layer focus trap
-- [Pre-Phase 2] Penpal v7 MessagePort behavior under specific CSP configs is under-documented; validate handshake timing in test fixtures early
+(None — Phase 2 pre-flight concerns resolved: focus trap uses `root.activeElement`, Penpal v7 tests use `vi.mock` pattern; cross-origin handshake deferred to Phase 4 Playwright test.)
 
 ## Session Continuity
 
