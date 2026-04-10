@@ -62,30 +62,30 @@ Requirements flagged **[research]** were added after the research phase surfaced
 
 ### Iframe Lifecycle
 
-- [ ] **IFR-01**: Iframe injected into `options.container` (default `document.body`) inside a backdrop element
-- [ ] **IFR-02**: Backdrop + iframe use configurable z-index (defaults 9000/9001)
-- [ ] **IFR-03**: Query params passed to iframe URL: `clientUrl`, `id`, `type`, `allowedMimeType`, `multiple`
-- [ ] **IFR-04**: Sandbox attribute set to `allow-scripts allow-same-origin allow-forms allow-popups`
-- [ ] **IFR-05**: `allow="clipboard-read; clipboard-write"`
-- [ ] **IFR-06**: Iframe `title` attribute set from `capability.appName` (WCAG 2.4.1, ACT cae760) **[research]**
-- [ ] **IFR-07**: Centered responsive styles: `min(90vw, 800px) × min(85vh, 600px)`, `border-radius: 8px`, subtle shadow
-- [ ] **IFR-08**: Constructor throws `OBCError { code: 'SAME_ORIGIN_CAPABILITY' }` if `new URL(capability.path).origin === location.origin` to prevent sandbox escape **[research]**
-- [ ] **IFR-09**: Loading indicator overlay shown inside host backdrop until Penpal handshake completes **[research]**
-- [ ] **IFR-10**: Body scroll lock while iframe/modal is open; restored on every close path **[research]**
+- [x] **IFR-01**: Iframe injected into `options.container` (default `document.body`) inside a backdrop element
+- [x] **IFR-02**: Backdrop + iframe use configurable z-index (defaults 9000/9001)
+- [x] **IFR-03**: Query params passed to iframe URL: `clientUrl`, `id`, `type`, `allowedMimeType`, `multiple`
+- [x] **IFR-04**: Sandbox attribute set to `allow-scripts allow-same-origin allow-forms allow-popups`
+- [x] **IFR-05**: `allow="clipboard-read; clipboard-write"`
+- [x] **IFR-06**: Iframe `title` attribute set from `capability.appName` (WCAG 2.4.1, ACT cae760) **[research]**
+- [x] **IFR-07**: Centered responsive styles: `min(90vw, 800px) × min(85vh, 600px)`, `border-radius: 8px`, subtle shadow
+- [x] **IFR-08**: Constructor throws `OBCError { code: 'SAME_ORIGIN_CAPABILITY' }` if `new URL(capability.path).origin === location.origin` to prevent sandbox escape **[research]**
+- [x] **IFR-09**: Loading indicator overlay shown inside host backdrop until Penpal handshake completes **[research]**
+- [x] **IFR-10**: Body scroll lock while iframe/modal is open; restored on every close path **[research]**
 
 ### Chooser Modal & Accessibility
 
-- [ ] **UI-01**: Modal lists matching capabilities with `appName` + optional icon
-- [ ] **UI-02**: Modal has a visible cancel button
-- [ ] **UI-03**: Root element has `role="dialog"` + `aria-modal="true"` + `aria-labelledby` pointing at a title node (WCAG 4.1.2) **[research]**
-- [ ] **UI-04**: ESC key dismisses modal → `cancel` callback **[research]**
-- [ ] **UI-05**: Backdrop click dismisses modal → `cancel` callback **[research]**
-- [ ] **UI-06**: Focus trap confines keyboard focus inside modal while open (WCAG 2.1.2) **[research]**
-- [ ] **UI-07**: Focus restored to the element that triggered `castIntent` on close (WCAG 2.4.3) **[research]**
-- [ ] **UI-08**: Shadow DOM (`attachShadow({ mode: 'open' })`) isolates modal styles from host CSS **[research: mode specified]**
-- [ ] **UI-09**: CSS reset inside Shadow DOM prevents host style inheritance leaks
-- [ ] **UI-10**: Capability metadata rendered via DOM APIs (`textContent`), never `innerHTML` **[research]**
-- [ ] **UI-11**: No external CSS dependencies
+- [x] **UI-01**: Modal lists matching capabilities with `appName` + optional icon
+- [x] **UI-02**: Modal has a visible cancel button
+- [x] **UI-03**: Root element has `role="dialog"` + `aria-modal="true"` + `aria-labelledby` pointing at a title node (WCAG 4.1.2) **[research]**
+- [x] **UI-04**: ESC key dismisses modal → `cancel` callback **[research]**
+- [x] **UI-05**: Backdrop click dismisses modal → `cancel` callback **[research]**
+- [x] **UI-06**: Focus trap confines keyboard focus inside modal while open (WCAG 2.1.2) **[research]**
+- [x] **UI-07**: Focus restored to the element that triggered `castIntent` on close (WCAG 2.4.3) **[research]**
+- [x] **UI-08**: Shadow DOM (`attachShadow({ mode: 'open' })`) isolates modal styles from host CSS **[research: mode specified]**
+- [x] **UI-09**: CSS reset inside Shadow DOM prevents host style inheritance leaks
+- [x] **UI-10**: Capability metadata rendered via DOM APIs (`textContent`), never `innerHTML` **[research]**
+- [x] **UI-11**: No external CSS dependencies
 
 ### Messaging Layer (Penpal)
 
@@ -213,27 +213,27 @@ Explicitly excluded. Documented to prevent scope creep.
 | INT-07 | Phase 2 | Complete |
 | INT-08 | Phase 2 | Complete |
 | INT-09 | Phase 2 | Complete |
-| IFR-01 | Phase 2 | Pending |
-| IFR-02 | Phase 2 | Pending |
-| IFR-03 | Phase 2 | Pending |
-| IFR-04 | Phase 2 | Pending |
-| IFR-05 | Phase 2 | Pending |
-| IFR-06 | Phase 2 | Pending |
-| IFR-07 | Phase 2 | Pending |
-| IFR-08 | Phase 2 | Pending |
-| IFR-09 | Phase 2 | Pending |
-| IFR-10 | Phase 2 | Pending |
-| UI-01 | Phase 2 | Pending |
-| UI-02 | Phase 2 | Pending |
-| UI-03 | Phase 2 | Pending |
-| UI-04 | Phase 2 | Pending |
-| UI-05 | Phase 2 | Pending |
-| UI-06 | Phase 2 | Pending |
-| UI-07 | Phase 2 | Pending |
-| UI-08 | Phase 2 | Pending |
-| UI-09 | Phase 2 | Pending |
-| UI-10 | Phase 2 | Pending |
-| UI-11 | Phase 2 | Pending |
+| IFR-01 | Phase 2 | Complete |
+| IFR-02 | Phase 2 | Complete |
+| IFR-03 | Phase 2 | Complete |
+| IFR-04 | Phase 2 | Complete |
+| IFR-05 | Phase 2 | Complete |
+| IFR-06 | Phase 2 | Complete |
+| IFR-07 | Phase 2 | Complete |
+| IFR-08 | Phase 2 | Complete |
+| IFR-09 | Phase 2 | Complete |
+| IFR-10 | Phase 2 | Complete |
+| UI-01 | Phase 2 | Complete |
+| UI-02 | Phase 2 | Complete |
+| UI-03 | Phase 2 | Complete |
+| UI-04 | Phase 2 | Complete |
+| UI-05 | Phase 2 | Complete |
+| UI-06 | Phase 2 | Complete |
+| UI-07 | Phase 2 | Complete |
+| UI-08 | Phase 2 | Complete |
+| UI-09 | Phase 2 | Complete |
+| UI-10 | Phase 2 | Complete |
+| UI-11 | Phase 2 | Complete |
 | MSG-01 | Phase 2 | Complete |
 | MSG-02 | Phase 2 | Complete |
 | MSG-03 | Phase 2 | Complete |
