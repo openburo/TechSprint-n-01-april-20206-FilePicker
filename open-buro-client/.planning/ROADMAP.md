@@ -13,7 +13,7 @@ Four phases take a greenfield TypeScript directory to a published, fully-tested 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundations** - Tooling scaffold, shared types, error model, and session-id utility — everything else depends on this (completed 2026-04-10)
-- [ ] **Phase 2: Core Implementation** - All independent layers built in parallel: capability loading/resolution/WS, intent orchestration, iframe lifecycle, chooser modal/a11y, and Penpal messaging bridge
+- [x] **Phase 2: Core Implementation** - All independent layers built in parallel: capability loading/resolution/WS, intent orchestration, iframe lifecycle, chooser modal/a11y, and Penpal messaging bridge (completed 2026-04-10)
 - [ ] **Phase 3: Orchestration** - `OpenBuroClient` facade wires Phase 2 layers into the public API with lifecycle management and session isolation
 - [ ] **Phase 4: Distribution & Quality** - Build outputs validated, exports map verified, integration tests pass, library published as `@openburo/client`
 
@@ -83,6 +83,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundations | 1/1 | Complete    | 2026-04-10 |
-| 2. Core Implementation | 4/5 | In Progress|  |
+| 2. Core Implementation | 5/5 | Complete   | 2026-04-10 |
 | 3. Orchestration | 0/TBD | Not started | - |
 | 4. Distribution & Quality | 0/TBD | Not started | - |
