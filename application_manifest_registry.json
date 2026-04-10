@@ -58,5 +58,20 @@
     "url": "https://837a-46-255-204-128.ngrok-free.app",
     "version": "1",
     "display": "modal"
+  },
+  {
+    "id": "twake-drive-filepicker",
+    "name": "Twake Drive File Picker",
+    "url": "https://openburo1-drive.stg.lin-saas.com/openburo.json",
+    "version": "0.0.1",
+    "capabilities": [
+      {
+        "action": "PICK",
+        "properties": {
+          "mimeTypes": ["*/*"]
+        },
+        "path":"https://openburo1-drive.stg.lin-saas.com/capabilities/PICK"
+      }
+    ]
   }
 ]
