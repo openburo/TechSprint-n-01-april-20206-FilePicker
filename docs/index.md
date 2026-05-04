@@ -46,6 +46,6 @@ Conceptuellement, trois couches doivent intervir :
    - [Protocole postMessage détaillé](proposition-hackathon/protocole-postmessage.md)
    - [Contournements navigateur](proposition-hackathon/contournements-navigateur.md)
    - [Sujets de réflexion pour les ateliers](proposition-hackathon/sujets-ateliers.md)
-3. [Approche back](approche-back.md)
+3. [Approche back](backend-approach/)
 4. [Bibliographie](bibliographie.md)
 5. [Glossaire](glossaire.md)
