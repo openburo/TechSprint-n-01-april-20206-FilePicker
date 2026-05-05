@@ -3,6 +3,7 @@ layout: default
 title: Approche front
 nav_order: 3
 has_children: true
+lang_alt_url: /en/hackathon-proposal/
 ---
 
 # Approche front
