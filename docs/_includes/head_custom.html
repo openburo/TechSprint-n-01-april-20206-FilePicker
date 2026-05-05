@@ -1,0 +1,48 @@
+<script>
+(function () {
+  function init() {
+    var path = window.location.pathname;
+    var currentLang = null;
+    if (path.indexOf('/fr/') !== -1) currentLang = 'fr';
+    else if (path.indexOf('/en/') !== -1) currentLang = 'en';
+    if (!currentLang) return; // root redirect page — nothing to do
+
+    // 1. Filter the side nav: hide items that link to the other language
+    var navItems = document.querySelectorAll('.site-nav .nav-list-item');
+    navItems.forEach(function (item) {
+      var link = item.querySelector('.nav-list-link');
+      if (!link) return;
+      var href = link.getAttribute('href') || '';
+      var linkLang = null;
+      if (href.indexOf('/fr/') !== -1) linkLang = 'fr';
+      else if (href.indexOf('/en/') !== -1) linkLang = 'en';
+      if (linkLang && linkLang !== currentLang) {
+        item.style.display = 'none';
+      }
+    });
+
+    // 2. Inject the language switcher into the auxiliary nav (top-right)
+    {% if page.lang_alt_url %}
+    var altUrl = '{{ page.lang_alt_url | relative_url }}';
+    var label = currentLang === 'fr' ? 'EN' : 'FR';
+    var auxNav = document.querySelector('.aux-nav-list');
+    if (auxNav && altUrl) {
+      var li = document.createElement('li');
+      li.className = 'aux-nav-list-item';
+      var a = document.createElement('a');
+      a.href = altUrl;
+      a.className = 'site-button';
+      a.textContent = label;
+      li.appendChild(a);
+      auxNav.insertBefore(li, auxNav.firstChild);
+    }
+    {% endif %}
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
