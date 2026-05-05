@@ -3,6 +3,7 @@ layout: default
 title: Protocole postMessage
 parent: Approche front
 nav_order: 2
+lang_alt_url: /en/hackathon-proposal/postmessage-protocol/
 ---
 
 # Protocole postMessage détaillé (DRAFT ALPHA)
