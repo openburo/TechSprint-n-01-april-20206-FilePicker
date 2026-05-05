@@ -3,6 +3,7 @@ layout: default
 title: Contournements navigateur
 parent: Approche front
 nav_order: 3
+lang_alt_url: /en/hackathon-proposal/browser-workarounds/
 ---
 
 # Contournements navigateur pour le hackathon (TBC)
