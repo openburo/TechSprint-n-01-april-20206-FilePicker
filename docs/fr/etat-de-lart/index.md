@@ -3,6 +3,7 @@ layout: default
 title: État de l'art
 nav_order: 2
 has_children: true
+lang_alt_url: /en/state-of-the-art/
 ---
 
 # État de l'art : Patterns d'Intents & Capabilities
