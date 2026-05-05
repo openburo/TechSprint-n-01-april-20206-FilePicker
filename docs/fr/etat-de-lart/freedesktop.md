@@ -3,6 +3,7 @@ layout: default
 title: Freedesktop.org (XDG)
 parent: État de l'art
 nav_order: 2
+lang_alt_url: /en/state-of-the-art/freedesktop/
 ---
 
 # Freedesktop.org (Standards Linux / XDG)
