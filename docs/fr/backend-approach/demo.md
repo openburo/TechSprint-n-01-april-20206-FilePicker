@@ -3,6 +3,7 @@ layout: default
 title: Demo
 parent: Backend approach
 nav_order: 3
+lang_alt_url: /en/backend-approach/demo/
 ---
 
 # Backend approach: demo
