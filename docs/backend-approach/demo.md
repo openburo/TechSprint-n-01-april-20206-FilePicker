@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Backend approach: demo
-nav_order: 4
+title: Demo
+parent: Backend approach
+nav_order: 3
 ---
 
 # Backend approach: demo
