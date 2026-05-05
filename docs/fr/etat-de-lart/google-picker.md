@@ -3,6 +3,7 @@ layout: default
 title: Google Picker API
 parent: État de l'art
 nav_order: 5
+lang_alt_url: /en/state-of-the-art/google-picker/
 ---
 
 # Google Picker API (référence propriétaire)
