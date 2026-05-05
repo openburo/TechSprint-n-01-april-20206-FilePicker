@@ -2,6 +2,7 @@
 layout: default
 title: Bibliographie
 nav_order: 5
+lang_alt_url: /en/references/
 ---
 
 # Bibliographie & références
