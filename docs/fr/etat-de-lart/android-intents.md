@@ -3,6 +3,7 @@ layout: default
 title: Android Intents
 parent: État de l'art
 nav_order: 1
+lang_alt_url: /en/state-of-the-art/android-intents/
 ---
 
 # Android Intents
