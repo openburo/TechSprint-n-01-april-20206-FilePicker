@@ -3,6 +3,7 @@ layout: default
 title: Sujets de réflexion
 parent: Approche front
 nav_order: 4
+lang_alt_url: /en/hackathon-proposal/workshop-topics/
 ---
 
 # Sujets de réflexion pour les ateliers
