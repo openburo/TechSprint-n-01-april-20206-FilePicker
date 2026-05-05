@@ -3,6 +3,7 @@ layout: default
 title: openDesk (ZenDiS)
 parent: État de l'art
 nav_order: 4
+lang_alt_url: /en/state-of-the-art/opendesk/
 ---
 
 # openDesk (ZenDiS / Gouvernement Allemand)
