@@ -14,7 +14,7 @@ lang_alt_url: /fr/backend-approach/
 
 ## Architecture
 
-![Minimal Viable Architecture](../../fr/backend-approach/openburo-filepicker.drawio.svg)
+![Minimal Viable Architecture](openburo-filepicker.drawio.svg)
 
 ## Principles
 

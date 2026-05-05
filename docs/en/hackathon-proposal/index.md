@@ -14,9 +14,9 @@ lang_alt_url: /fr/proposition-hackathon/
 
 ## Architecture — Principle
 
-![Target minimal architecture](../../fr/proposition-hackathon/architecture-cible.svg)
+![Target minimal architecture](architecture-cible.svg)
 
-*[Open in Excalidraw](https://excalidraw.com/#json=){:target="_blank"} — [Editable source](../../fr/proposition-hackathon/architecture-cible.excalidraw)*
+*[Open in Excalidraw](https://excalidraw.com/#json=){:target="_blank"} — [Editable source](architecture-cible.excalidraw)*
 
 ## Principles
 

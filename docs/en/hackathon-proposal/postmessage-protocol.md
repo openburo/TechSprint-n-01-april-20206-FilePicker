@@ -12,9 +12,9 @@ lang_alt_url: /fr/proposition-hackathon/protocole-postmessage/
 
 ---
 
-![postMessage Protocol](../../fr/proposition-hackathon/protocole-postmessage.svg)
+![postMessage Protocol](protocole-postmessage.svg)
 
-*[Editable source](../../fr/proposition-hackathon/protocole-postmessage.excalidraw)*
+*[Editable source](protocole-postmessage.excalidraw)*
 
 **postMessage security:** Every message must be validated against `event.origin` on the receiver side.
 

@@ -41,9 +41,9 @@ Each declared intent contains:
 
 ## Intent Lifecycle
 
-![Lifecycle of a Cozy intent](../../fr/etat-de-lart/cozy-cycle-vie-intent.svg)
+![Lifecycle of a Cozy intent](cozy-cycle-vie-intent.svg)
 
-*[Editable source](../../fr/etat-de-lart/cozy-cycle-vie-intent.excalidraw)*
+*[Editable source](cozy-cycle-vie-intent.excalidraw)*
 
 **Detailed steps:**
 
