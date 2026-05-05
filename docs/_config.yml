@@ -5,6 +5,8 @@ remote_theme: just-the-docs/just-the-docs
 url: ""
 baseurl: "/TechSprint-n-01-april-20206-FilePicker"
 
+permalink: pretty
+
 plugins:
   - jekyll-remote-theme
 
