@@ -1,6 +1,7 @@
 ---
 layout: default
-title: Backend approach: appendices
+title: Appendices
+parent: Backend approach
 nav_order: 4
 ---
 
