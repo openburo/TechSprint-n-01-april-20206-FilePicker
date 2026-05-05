@@ -3,6 +3,7 @@ layout: default
 title: Cozy Cloud / Twake
 parent: État de l'art
 nav_order: 3
+lang_alt_url: /en/state-of-the-art/cozy-twake/
 ---
 
 # Cozy Cloud / Twake Workplace
