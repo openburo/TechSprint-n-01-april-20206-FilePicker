@@ -2,6 +2,7 @@
 layout: default
 title: Glossaire
 nav_order: 6
+lang_alt_url: /en/glossary/
 ---
 
 # Glossaire
