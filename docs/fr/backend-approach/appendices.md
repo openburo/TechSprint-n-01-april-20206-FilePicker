@@ -3,6 +3,7 @@ layout: default
 title: Appendices
 parent: Backend approach
 nav_order: 4
+lang_alt_url: /en/backend-approach/appendices/
 ---
 
 # Backend approach: appendices
