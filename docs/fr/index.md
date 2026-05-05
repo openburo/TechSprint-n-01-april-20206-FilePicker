@@ -2,6 +2,7 @@
 layout: default
 title: Accueil
 nav_order: 1
+lang_alt_url: /en/
 ---
 
 # Open Buro — Tech Sprint n°1 : File Picker
