@@ -3,6 +3,7 @@ layout: default
 title: Sémantique File Picker
 parent: Approche front
 nav_order: 1
+lang_alt_url: /en/hackathon-proposal/file-picker-semantics/
 ---
 
 # Sémantique du File Picker Intent (DRAFT ALPHA)
