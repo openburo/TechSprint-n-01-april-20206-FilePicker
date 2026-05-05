@@ -3,6 +3,7 @@ layout: default
 title: Tableau comparatif
 parent: État de l'art
 nav_order: 6
+lang_alt_url: /en/state-of-the-art/comparison/
 ---
 
 # Tableau Comparatif
