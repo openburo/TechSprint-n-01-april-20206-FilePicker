@@ -17,7 +17,7 @@ We developed a POC server that can act as a proxy exposing the OpenBuro file
 picker API for services that are not natively integrated with OpenBuro.
 
 Source code of the project is available at:
-https://github.com/openburo/openburo-router
+[github.com/openburo/openburo-router](https://github.com/openburo/openburo-router)
 
 You will find a back-end with different connectors to:
 
