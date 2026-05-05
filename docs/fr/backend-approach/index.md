@@ -2,6 +2,7 @@
 layout: default
 title: Backend approach
 nav_order: 4
+lang_alt_url: /en/backend-approach/
 ---
 
 # Backend approach
