@@ -61,7 +61,7 @@ Ces questions structurent les discussions techniques du hackathon :
 * l'app cliente indique au sdk l'url où récupérer le tableau des manifest
 * `ob_sdk.init({manifests:string|obj})`
 
-## intent mangement : cyble de vie de la capability
+## intent management : cycle de vie de la capability
 
 - Paramètres passés en query string, dans le hash, ou uniquement via postMessage ?
 - iframe vs nouvel onglet vs popup ? Contraintes UX et techniques de chacun
@@ -132,20 +132,20 @@ Ces questions structurent les discussions techniques du hackathon :
 - La plateforme doit-elle fournir une liste blanche de domaines autorisés en iframe ? comment les connaitres ?
 - Sécurité : validation d'origin, protection contre le spoofing de messages
 - Protection contre le clickjacking quand le picker est en iframe
-- Persistent capabilitys : un intent peut-il rester ouvert (ex. sync continue, ou pour ouverture plus rapide) ?
+- Persistent capabilities : un intent peut-il rester ouvert (ex. sync continue, ou pour ouverture plus rapide) ?
 
 service CSP != iframe CSP
 
 
 **Choix pour le techsprint** :
 * le service doit avoir la liste des URLs qui peuvent l'appeler => v1 hardcodé, v2 manifest de client, vX openburo server
-* le client doit avoir la liste des URLS qu'il peut intéger => déduit du manifest
+* le client doit avoir la liste des URLS qu'il peut intégrer => déduit du manifest
 * targetOrigin = le client passe dans la query string d'init l'url du client pour éviter les navigate dans le parent
 * clickjacking = pas de soucis si CSP ? à vérifier
 
 **Non priorisé**
-Persistent capabilitys: besoin de init en postMessage, pas nécessaire pour le POC
+Persistent capabilities: besoin de init en postMessage, pas nécessaire pour le POC
 
 ---
 
-[Suivant : Approche back →](../approche-back.md)
+[Suivant : Approche back →](../backend-approach/)

@@ -38,7 +38,7 @@ openDesk n'a **pas de système d'intents** à proprement parler. À la place, l'
 ## Le FilePicker openDesk
 
 Le FilePicker Nextcloud est intégré dans OX App Suite pour : attacher des fichiers Nextcloud aux emails, insérer des liens Nextcloud dans les emails, sauvegarder des pièces jointes dans Nextcloud, attacher des fichiers aux entrées de calendrier. 
-IL faut donc rajouter le code du composant de file picker de chaque app cible. Par ex ici l'[addon dans Open Xchange pour disposer d'un front Next Cloud](https://gitlab.open-xchange.com/extensions/nextcloud-integration/-/tree/main).
+Il faut donc rajouter le code du composant de file picker de chaque app cible. Par ex ici l'[addon dans Open Xchange pour disposer d'un front Next Cloud](https://gitlab.open-xchange.com/extensions/nextcloud-integration/-/tree/main).
 
 **Deux chemins d'intégration :**
 
@@ -46,9 +46,9 @@ IL faut donc rajouter le code du composant de file picker de chaque app cible. P
 - **Backend** — Le middleware OX communique directement avec l'API Nextcloud pour les transferts de fichiers volumineux (évite de faire transiter les données par le navigateur)
 
 **Conséquences**
-- l'app appelante dispose de tous les droits de l'utilisateur sur l'applicatoin cible (pas de zero trust)
+- l'app appelante dispose de tous les droits de l'utilisateur sur l'application cible (pas de zero trust)
 - l'ICS a tout les droits sur toutes les données de tous les utilisateurs de l'application cible (pas de zero trust)
-- il faut modifier les clients des app appelantes pour y mettre les composants graphiques du File picker de l'app cible, ce qui génère des poinst d'attention sur la gestion des routes, de mise à jour des composants, de coordination des version entre le FP dans l'app appelante et l'app cible.
+- il faut modifier les clients des app appelantes pour y mettre les composants graphiques du File picker de l'app cible, ce qui génère des points d'attention sur la gestion des routes, de mise à jour des composants, de coordination des version entre le FP dans l'app appelante et l'app cible.
 
 ## Ressources openDesk
 

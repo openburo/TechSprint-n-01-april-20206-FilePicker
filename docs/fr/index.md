@@ -15,7 +15,7 @@ lang_alt_url: /en/
 
 Open Buro vise à établir un **standard ouvert d'orchestration de services collaboratifs**. Le File Picker est le premier cas concret : permettre à n'importe quelle application (mail, docs, chat, agenda…) de demander à n'importe quel drive (TDrive, Fichier DINUM, Nextcloud…) de présenter une interface de sélection de fichiers, et de recevoir le résultat de manière standardisée.
 
-Conceptuellement, trois couches doivent intervir :
+Conceptuellement, trois couches doivent intervenir :
 
 | Couche                  | Rôle                                                         | Exemple                                                             |
 | ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------- |
@@ -24,12 +24,12 @@ Conceptuellement, trois couches doivent intervir :
 | **Plateforme**          | Met en relation le client et la capability                   | Serveur d'intents minimal, ou configuration statique, ex Stack Cozy |
 
 
-=> **Ce dossier présente :
+**Ce dossier présente :**
 
 1. un état de l'art : patterns existants, comparaison d'implémentations
 2. la présentation des 2 approches explorées pendant le techsprint :
    1. l'approche Front
-   2. l'approche Fack 
+   2. l'approche Back
 
 ---
 

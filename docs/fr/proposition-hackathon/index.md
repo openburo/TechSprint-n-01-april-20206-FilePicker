@@ -39,7 +39,7 @@ lang_alt_url: /en/hackathon-proposal/
    1. **Authentification** — L'utilisateur dispose déjà de sessions web ouvertes sur les trois services (app cliente, source/drive, plateforme), chacun sur son propre domaine. Pas de SSO ni de token exchange. Pour le hackathon, il est possible de contourner les sécurité du navigateur (CSP, same-origin) via des extensions browser.
    2. **Droits** — Pas d'interaction directe entre l'app cliente et la source. Si le File Picker retourne un lien plutôt qu'un fichier, l'URL intègre le token selon la stratégie propre au drive — pas besoin de normaliser l'accès, juste la réponse HTTP.
 2. **UX intégrée** : le FP s'ouvre directement dans l'app cliente, pas de nouvelle fenêtre.
-3. **un FP totalement adapté à son back** : le front du FP est fournit par le drive et peut donc en exploiter au mieux toutes les fonctionnalités du drive (couleur des dossiers, icones par dossier, gestions de satuts et metadonnées des fichiers, favoris...)
+3. **un FP totalement adapté à son back** : le front du FP est fourni par le drive et peut donc en exploiter au mieux toutes les fonctionnalités du drive (couleur des dossiers, icônes par dossier, gestion des statuts et métadonnées des fichiers, favoris...)
 4. **couplage lache** : l'app cliente ne connait absolument rien ni du FP, ni de l'application cible.
 5. **Faible empreinte dans l'app cliente** : ajout d'une librairie, appel à une api avec un call back.
 6. **auto discovery & généricité** : grace à l'expositions des capabilities par les manifest des applications et centralisée par la "plateforme"

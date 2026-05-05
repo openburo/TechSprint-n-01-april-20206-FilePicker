@@ -7,7 +7,7 @@ lang_alt_url: /en/backend-approach/
 
 # Backend approach
 
-[← Approche front](proposition-hackathon/) · [Accueil](index.md)
+[← Approche front](../proposition-hackathon/) · [Accueil](../index.md)
 
 ---
 

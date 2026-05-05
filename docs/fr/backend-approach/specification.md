@@ -138,7 +138,7 @@ Get target file (identified _via_ its `id`) share link.
 
 ## Server capabilities 
 
-Openburo-compatible servers explictly describe their capabilities by providing
+Openburo-compatible servers explicitly describe their capabilities by providing
 a `.well-known` file hosted at their root domain, e.g.:
 `https://drive.com/.well-known/openburo/config.json`
 

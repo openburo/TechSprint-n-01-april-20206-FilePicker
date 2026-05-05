@@ -7,7 +7,7 @@ lang_alt_url: /en/references/
 
 # Bibliographie & références
 
-[← Approche back](approche-back.md) · [Accueil](index.md)
+[← Approche back](backend-approach/) · [Accueil](index.md)
 
 ---
 
