@@ -16,6 +16,10 @@
     ]
   },
   {
+    "id": "webdav-filepicker",
+    "name": "WebDAV File Picker",
+    "url": "http://10.4.0.32:5000",
+    "version": "1",
     "capabilities": [
       {
         "action": "PICK",
@@ -36,12 +40,13 @@
         }
       }
     ],
-    "id": "webdav-filepicker",
-    "name": "WebDAV File Picker",
-    "url": "http://10.4.0.32:5000",
-    "version": "1"
   },
   {
+    "id": "fichiers-file-picker",
+    "name": "Fichiers File Picker",
+    "url": "https://837a-46-255-204-128.ngrok-free.app",
+    "version": "1",
+    "display": "modal",
     "capabilities": [
       {
         "action": "PICK",
@@ -52,12 +57,7 @@
           ]
         }
       }
-    ],
-    "id": "fichiers-file-picker",
-    "name": "Fichiers File Picker",
-    "url": "https://837a-46-255-204-128.ngrok-free.app",
-    "version": "1",
-    "display": "modal"
+    ]
   },
   {
     "id": "twake-drive-filepicker",
