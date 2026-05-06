@@ -96,7 +96,15 @@ Ces questions structurent les discussions techniques du hackathon :
 - Pour le contenu : limite de taille raisonnable pour base64 dans postMessage ?
 - Métadonnées minimales dans la réponse : `name`, `mimeType`, `size`, `url` — quoi d'autre ?
 
-**Choix pour le techsprint** :
+# Protocoles du TechSprint
+
+Note: c'est la responsabilité du client de ferme les fenêtres et iframe
+Points à discuter: répondre à chaque message "ready" ou une seule fois
+
+### Protocole PICK
+
+#### Action PICK: envoyer les données
+
 ```
 {
     status: done,
@@ -117,6 +125,8 @@ Ces questions structurent les discussions techniques du hackathon :
 }
 ```
 
+#### Action PICK: Message d'erreur
+
 ```
 {
     "status": "error",
@@ -125,6 +135,73 @@ Ces questions structurent les discussions techniques du hackathon :
 }
 ```
 
+#### Action PICK: Annulation
+
+```
+{
+    "status": "cancel",
+    id: string,
+}
+```
+
+### Protocole SAVE
+
+#### Action SAVE: Prévenir que le serveur est prêt à recevoir
+
+```
+{
+ status : ready 
+}
+```
+
+#### Action SAVE: Envoyer les données (suite à un message ready)
+
+{
+    status: save,
+    id: string,
+    // allow multifile selection
+    results: [
+        // allow to get both type from a file
+        {
+            name: string
+            mimeType: string
+            size: number // bytes  
+            sharingUrl?: string
+            downloadUrl?: string
+            payload?: any
+        }
+    ]
+
+}
+
+#### Action SAVE: Confirmation de la reception
+
+```
+{
+    "status": "done",
+    id: string,
+    "message": string
+}
+```
+
+#### Action SAVE: Message d'erreur
+
+```
+{
+    "status": "error",
+    id: string,
+    "message": string
+}
+```
+
+#### Action PICK et SAVE: Annulation
+
+```
+{
+    "status": "cancel",
+    id: string,
+}
+```
 
 ## Sécurité (CORS, CSP, et au-delà)
 
